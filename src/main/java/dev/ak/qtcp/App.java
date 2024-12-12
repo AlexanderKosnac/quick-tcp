@@ -1,13 +1,12 @@
 package dev.ak.qtcp;
 
-/**
- * Hello world!
- *
- */
+import dev.ak.qtcp.view.LauncherView;
+import dev.ak.qtcp.viewModel.LauncherViewModel;
+
 public class App 
 {
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
-        System.out.println( "Hello World!" );
+        new LauncherView(new LauncherViewModel());
     }
 }
