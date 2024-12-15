@@ -2,10 +2,12 @@ package dev.ak.qtcp.viewModel;
 
 import java.awt.event.ActionEvent;
 
+import dev.ak.qtcp.view.AboutView;
+
 public class LauncherViewModel {
     
     public void HelpAboutCommand(ActionEvent e) {
-        System.out.println("'About' menu item clicked");
+        new AboutView();
     }
 
     public void CreateServerCommand(ActionEvent e) {
