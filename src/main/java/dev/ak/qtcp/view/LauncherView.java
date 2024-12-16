@@ -1,10 +1,7 @@
 package dev.ak.qtcp.view;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
-
+import javax.swing.*;
 import dev.ak.qtcp.viewModel.LauncherViewModel;
 
 public class LauncherView extends JFrame {
@@ -12,39 +9,52 @@ public class LauncherView extends JFrame {
     private static int pad = 5;
 
     public LauncherView(LauncherViewModel viewModel) {
+        setTitle("Quick TCP Launcher");
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+
+        // Set layout for content pane
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new GridBagLayout());
+
+        // Menu bar
         JMenuBar menuBar = new JMenuBar();
         JMenu help = new JMenu("Help");
         JMenuItem helpAbout = new JMenuItem("About");
         
         menuBar.add(help);
         help.add(helpAbout);
-
         helpAbout.addActionListener(e -> viewModel.HelpAboutCommand(e));
-    
         setJMenuBar(menuBar);
 
-        JPanel panel = new JPanel(new GridLayout(2, 1, pad, pad));
-        add(panel);
-        panel.setBorder(new EmptyBorder(pad, pad, pad, pad));
+        // Body
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(pad, pad, pad, pad);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        panel.add(new JLabel("Create new server and client instances from this window."));
+        // Help Text
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2; // Spans two columns
+        String helpText = "Create new server and client instances from this window.";
+        contentPane.add(new JLabel(helpText), gbc);
 
-        JPanel startButtons = new JPanel(new GridLayout(1, 2, pad, pad));
-        panel.add(startButtons);
-
+        // Server Button
+        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridwidth = 1; // Reset gridwidth
         JButton createServer = new JButton("New Server");
-        startButtons.add(createServer);
         createServer.addActionListener(e -> viewModel.CreateServerCommand(e));
+        contentPane.add(createServer, gbc);
 
+        // Client Button
+        gbc.gridx = 1;
         JButton createClient = new JButton("New Client");
-        startButtons.add(createClient);
         createClient.addActionListener(e -> viewModel.CreateClientCommand(e));
+        contentPane.add(createClient, gbc);
 
-        setTitle("Quick TCP Launcher");
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
         setVisible(true);
     }
 }
