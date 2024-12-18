@@ -44,6 +44,11 @@ public class ClientView extends JFrame {
         JTextField portInput = new JTextField();
         contentPane.add(portInput, gbc);
 
+        gbc.gridx = 4;
+        gbc.weightx = 0.2;
+        JButton connect = new JButton("Connect");
+        contentPane.add(connect, gbc);
+
         setVisible(true);
     }
 }

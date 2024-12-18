@@ -15,7 +15,6 @@ public class LauncherView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
 
-        // Set layout for content pane
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
 

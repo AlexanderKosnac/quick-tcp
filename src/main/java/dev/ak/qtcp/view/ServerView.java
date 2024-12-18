@@ -45,6 +45,11 @@ public class ServerView extends JFrame {
         JTextField portInput = new JTextField();
         contentPane.add(portInput, gbc);
 
+        gbc.gridx = 4;
+        gbc.weightx = 0.2;
+        JButton start = new JButton("Start");
+        contentPane.add(start, gbc);
+
         setVisible(true);
     }
 }
