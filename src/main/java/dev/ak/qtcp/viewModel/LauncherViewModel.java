@@ -2,7 +2,7 @@ package dev.ak.qtcp.viewModel;
 
 import java.awt.event.ActionEvent;
 
-import dev.ak.qtcp.view.AboutView;
+import dev.ak.qtcp.view.*;
 
 public class LauncherViewModel {
     
@@ -11,10 +11,10 @@ public class LauncherViewModel {
     }
 
     public void CreateServerCommand(ActionEvent e) {
-        System.out.println("Create server clicked");
+        new ServerView();
     }
 
     public void CreateClientCommand(ActionEvent e) {
-        System.out.println("Create client clicked");
+        new ClientView();
     }
 }
