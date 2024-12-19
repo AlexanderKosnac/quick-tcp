@@ -4,13 +4,15 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import dev.ak.qtcp.viewModel.ClientViewModel;
+
 public class ClientView extends JFrame {
 
     private static int number = 1;
 
     private static int pad = 5;
 
-    public ClientView() {
+    public ClientView(ClientViewModel vm) {
         setTitle(String.format("Quick TCP Client #%d", number++));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

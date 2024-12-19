@@ -11,10 +11,10 @@ public class LauncherViewModel {
     }
 
     public void CreateServerCommand(ActionEvent e) {
-        new ServerView();
+        new ServerView(new ServerViewModel());
     }
 
     public void CreateClientCommand(ActionEvent e) {
-        new ClientView();
+        new ClientView(new ClientViewModel());
     }
 }

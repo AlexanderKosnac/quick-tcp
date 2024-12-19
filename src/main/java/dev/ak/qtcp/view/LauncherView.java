@@ -8,7 +8,7 @@ public class LauncherView extends JFrame {
 
     private static int pad = 5;
 
-    public LauncherView(LauncherViewModel viewModel) {
+    public LauncherView(LauncherViewModel vm) {
         setTitle("Quick TCP Launcher");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -25,7 +25,7 @@ public class LauncherView extends JFrame {
         
         menuBar.add(help);
         help.add(helpAbout);
-        helpAbout.addActionListener(e -> viewModel.HelpAboutCommand(e));
+        helpAbout.addActionListener(e -> vm.HelpAboutCommand(e));
         setJMenuBar(menuBar);
 
         // Body
@@ -45,13 +45,13 @@ public class LauncherView extends JFrame {
         gbc.gridx = 0;
         gbc.gridwidth = 1; // Reset gridwidth
         JButton createServer = new JButton("New Server");
-        createServer.addActionListener(e -> viewModel.CreateServerCommand(e));
+        createServer.addActionListener(e -> vm.CreateServerCommand(e));
         contentPane.add(createServer, gbc);
 
         // Client Button
         gbc.gridx = 1;
         JButton createClient = new JButton("New Client");
-        createClient.addActionListener(e -> viewModel.CreateClientCommand(e));
+        createClient.addActionListener(e -> vm.CreateClientCommand(e));
         contentPane.add(createClient, gbc);
 
         setVisible(true);
