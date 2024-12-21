@@ -51,6 +51,17 @@ public class ClientView extends JFrame {
         JButton connect = new JButton("Connect");
         contentPane.add(connect, gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 4;
+        JTextField messageInput = new JTextField();
+        contentPane.add(messageInput, gbc);
+
+        gbc.gridx = 4;
+        gbc.gridwidth = 1;
+        JButton sendButton = new JButton("Send");
+        contentPane.add(sendButton, gbc);
+
         setVisible(true);
     }
 }
