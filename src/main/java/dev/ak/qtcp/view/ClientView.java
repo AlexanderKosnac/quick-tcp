@@ -16,7 +16,7 @@ public class ClientView extends JFrame {
         setTitle(String.format("Quick TCP Client #%d", number++));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 600);
 
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
@@ -33,7 +33,7 @@ public class ClientView extends JFrame {
 
         gbc.gridx = 1;
         gbc.weightx = 1.0;
-        JTextField ipInput = new JTextField();
+        JTextField ipInput = new JTextField("127.0.0.1");
         contentPane.add(ipInput, gbc);
 
         // Port
@@ -43,7 +43,7 @@ public class ClientView extends JFrame {
 
         gbc.gridx = 3;
         gbc.weightx = 1.0;
-        JTextField portInput = new JTextField();
+        JTextField portInput = new JTextField("9999");
         contentPane.add(portInput, gbc);
 
         gbc.gridx = 4;

@@ -16,7 +16,7 @@ public class ServerView extends JFrame {
         setTitle(String.format("Quick TCP Server #%d", number++));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 600);
 
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
@@ -44,7 +44,7 @@ public class ServerView extends JFrame {
 
         gbc.gridx = 3;
         gbc.weightx = 1.0;
-        JTextField portInput = new JTextField();
+        JTextField portInput = new JTextField("9999");
         contentPane.add(portInput, gbc);
 
         gbc.gridx = 4;
@@ -56,6 +56,20 @@ public class ServerView extends JFrame {
             vm.OpenServerCommand(e);
         });
         contentPane.add(start, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 5;
+        contentPane.add(new JLabel("Incoming Messages:"), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 5;
+        JTextArea incoming = new JTextArea();
+        incoming.setEnabled(false);
+        incoming.setRows(10);
+        JScrollPane incomingPane = new JScrollPane(incoming);
+        contentPane.add(incomingPane, gbc);
 
         setVisible(true);
     }
