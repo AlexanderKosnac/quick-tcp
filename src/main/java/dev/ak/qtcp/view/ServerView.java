@@ -50,6 +50,11 @@ public class ServerView extends JFrame {
         gbc.gridx = 4;
         gbc.weightx = 0.2;
         JButton start = new JButton("Start");
+        start.addActionListener(e -> {
+            vm.ipInput = ipInput.getText();
+            vm.portInput = portInput.getText();
+            vm.OpenServerCommand(e);
+        });
         contentPane.add(start, gbc);
 
         setVisible(true);
