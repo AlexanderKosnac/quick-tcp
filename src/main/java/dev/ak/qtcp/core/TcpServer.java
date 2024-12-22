@@ -24,24 +24,40 @@ public class TcpServer {
                 Socket socket = serverSocket.accept();
                 onSystemMessage.accept("Client connected");
 
-                try (
-                    InputStream input = socket.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                    OutputStream output = socket.getOutputStream();
-                    PrintWriter writer = new PrintWriter(output, true)
-                    ) {
-
-                    String text;
-                    while ((text = reader.readLine()) != null) {
-                        onSystemMessage.accept("Received: " + text);
-                        writer.println("Server: " + text);
-                    }
-                } catch (IOException ex) {
-                    onSystemMessage.accept("Server exception: " + ex.getMessage());
-                }
+                ClientHandler handler = new ClientHandler(socket);
+                handler.onSystemMessage = onSystemMessage;
+                handler.start();
             }
         } catch (IOException ex) {
             onSystemMessage.accept("Server exception: " + ex.getMessage());
+        }
+    }
+}
+
+class ClientHandler extends Thread {
+
+    public Consumer<String> onSystemMessage = (e) -> {};
+
+    private Socket socket;
+
+    public ClientHandler(Socket socket) {
+        this.socket = socket;
+    }
+
+    public void run() {
+        try (InputStream input = socket.getInputStream();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+             OutputStream output = socket.getOutputStream();
+             PrintWriter writer = new PrintWriter(output, true)) {
+
+            String text;
+            while ((text = reader.readLine()) != null) {
+                onSystemMessage.accept("Received: " + text);
+                writer.println("Server: " + text);
+            }
+        } catch (IOException ex) {
+            onSystemMessage.accept("Server exception: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }
