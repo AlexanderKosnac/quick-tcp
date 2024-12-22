@@ -49,6 +49,11 @@ public class ClientView extends JFrame {
         gbc.gridx = 4;
         gbc.weightx = 0.2;
         JButton connect = new JButton("Connect");
+        connect.addActionListener(e -> {
+            vm.ipInput = ipInput.getText();
+            vm.portInput = portInput.getText();
+            vm.ConnectToServerCommand(e);
+        });
         contentPane.add(connect, gbc);
 
         gbc.gridx = 0;
@@ -60,6 +65,10 @@ public class ClientView extends JFrame {
         gbc.gridx = 4;
         gbc.gridwidth = 1;
         JButton sendButton = new JButton("Send");
+        sendButton.addActionListener(e -> {
+            vm.messageInput = messageInput.getText();
+            vm.SendMessageCommand(e);
+        });
         contentPane.add(sendButton, gbc);
 
         setVisible(true);
