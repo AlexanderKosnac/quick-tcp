@@ -14,13 +14,11 @@ public class TcpServer {
 
     public Consumer<String> onSystemMessage = (e) -> {};
 
-    public boolean opened = true;
-
     public void open(int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             onSystemMessage.accept("Server opened on port " + port);
 
-            while (opened) {
+            while (true) {
                 Socket socket = serverSocket.accept();
                 onSystemMessage.accept("Client connected");
 

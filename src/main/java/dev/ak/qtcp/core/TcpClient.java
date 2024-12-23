@@ -11,17 +11,15 @@ public class TcpClient {
     private Socket socket;
     private PrintWriter writer;
     private BufferedReader reader;
-    private boolean connected = false;
 
     public void connect(String hostname, int port) {
         try {
             socket = new Socket(hostname, port);
             writer = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            connected = true;
 
             String response;
-            while (connected && (response = reader.readLine()) != null) {
+            while ((response = reader.readLine()) != null) {
                 onSystemMessage.accept("Server Response: " + response);
             }
         } catch (UnknownHostException ex) {
@@ -34,7 +32,7 @@ public class TcpClient {
     }
 
     public void send(String message) {
-        if (connected && writer != null) {
+        if (writer != null) {
             writer.println(message);
         } else {
             onSystemMessage.accept("Not connected to a server.");
@@ -43,7 +41,6 @@ public class TcpClient {
 
     public void disconnect() {
         try {
-            connected = false;
             if (reader != null) reader.close();
             if (writer != null) writer.close();
             if (socket != null) socket.close();

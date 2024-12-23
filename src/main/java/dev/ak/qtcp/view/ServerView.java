@@ -68,7 +68,7 @@ public class ServerView extends JFrame {
         JTextArea messageLog = new JTextArea();
         messageLog.setEnabled(false);
         messageLog.setRows(10);
-        vm.onSystemMessage = msg -> messageLog.append(msg + "\n");;
+        vm.onSystemMessage = msg -> messageLog.append(msg + "\n");
         JScrollPane logPane = new JScrollPane(messageLog);
         contentPane.add(logPane, gbc);
 
