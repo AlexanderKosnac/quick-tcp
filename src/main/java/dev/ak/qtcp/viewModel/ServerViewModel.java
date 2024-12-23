@@ -9,9 +9,10 @@ import dev.ak.qtcp.core.TcpServer;
 
 public class ServerViewModel {
 
+    public Consumer<String> onSystemMessage = (e) -> {};
+
     public String ipInput;
     public String portInput;
-    public Consumer<String> onSystemMessage;
 
     public void OpenServerCommand(ActionEvent e) {
         TcpServer server = new TcpServer();

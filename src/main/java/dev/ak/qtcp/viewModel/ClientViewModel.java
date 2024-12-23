@@ -3,10 +3,13 @@ package dev.ak.qtcp.viewModel;
 import java.awt.event.ActionEvent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 import dev.ak.qtcp.core.TcpClient;
 
 public class ClientViewModel {
+
+    public Consumer<String> onSystemMessage = (e) -> {};
 
     public String ipInput;
     public String portInput;
@@ -17,9 +20,7 @@ public class ClientViewModel {
 
     public ClientViewModel() {
         client = new TcpClient();
-        client.onSystemMessage = msg -> {
-            System.out.println("[Client] " + msg);
-        };
+        client.onSystemMessage = onSystemMessage;
 
         executor = Executors.newSingleThreadExecutor();
     }
