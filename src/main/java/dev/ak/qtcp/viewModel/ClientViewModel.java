@@ -18,14 +18,11 @@ public class ClientViewModel {
     private TcpClient client;
     private ExecutorService executor;
 
-    public ClientViewModel() {
+    public void ConnectToServerCommand(ActionEvent e) {
         client = new TcpClient();
         client.onSystemMessage = onSystemMessage;
 
         executor = Executors.newSingleThreadExecutor();
-    }
-
-    public void ConnectToServerCommand(ActionEvent e) {
         executor.submit(() -> {
             client.connect(ipInput, getStringAsIntOrZero(portInput));
         });

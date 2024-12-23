@@ -71,6 +71,21 @@ public class ClientView extends JFrame {
         });
         contentPane.add(sendButton, gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 5;
+        contentPane.add(new JLabel("Message Log:"), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 5;
+        JTextArea messageLog = new JTextArea();
+        messageLog.setEnabled(false);
+        messageLog.setRows(10);
+        vm.onSystemMessage = msg -> messageLog.append(msg + "\n");
+        JScrollPane logPane = new JScrollPane(messageLog);
+        contentPane.add(logPane, gbc);
+
         setVisible(true);
     }
 }
