@@ -18,6 +18,7 @@ public class TcpClient {
             writer = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+            onSystemMessage.accept("Connected to Server (" + hostname + ":" + port + ").");
             String response;
             while ((response = reader.readLine()) != null) {
                 onSystemMessage.accept("Server Response: " + response);

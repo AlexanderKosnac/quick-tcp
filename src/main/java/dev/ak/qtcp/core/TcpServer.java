@@ -16,11 +16,11 @@ public class TcpServer {
 
     public void open(int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            onSystemMessage.accept("Server opened on port " + port);
+            onSystemMessage.accept("Server opened on port " + port + ".");
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                onSystemMessage.accept("Client connected");
+                onSystemMessage.accept("Client (" + socket.getInetAddress().getHostAddress() + ") connected.");
 
                 ClientHandler handler = new ClientHandler(socket);
                 handler.onSystemMessage = onSystemMessage;
@@ -51,7 +51,7 @@ class ClientHandler extends Thread {
             String text;
             while ((text = reader.readLine()) != null) {
                 onSystemMessage.accept("Received: " + text);
-                writer.println("Server: " + text);
+                writer.println("Received " + text.length() + " bytes.");
             }
         } catch (IOException ex) {
             onSystemMessage.accept("Server exception: " + ex.getMessage());
