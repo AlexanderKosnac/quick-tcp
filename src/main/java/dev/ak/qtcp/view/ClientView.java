@@ -79,6 +79,9 @@ public class ClientView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 5;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
         JTextArea messageLog = new JTextArea();
         messageLog.setEnabled(false);
         messageLog.setRows(10);
