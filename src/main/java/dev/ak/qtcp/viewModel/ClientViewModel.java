@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 import dev.ak.qtcp.core.TcpClient;
+import dev.ak.qtcp.core.Util;
 
 public class ClientViewModel {
 
@@ -24,23 +25,11 @@ public class ClientViewModel {
 
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
-            client.connect(ipInput, getStringAsIntOrZero(portInput));
+            client.connect(ipInput, Util.getStringAsIntOrZero(portInput));
         });
     }
 
     public void SendMessageCommand(ActionEvent e) {
         client.send(messageInput);
-    }
-
-    public static int getStringAsIntOrZero(String input) {
-        return getStringAsIntOrDefault(input, 0);
-    }
-
-    public static int getStringAsIntOrDefault(String input, int defaultVal) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return defaultVal;
-        }
     }
 }
