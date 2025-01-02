@@ -15,13 +15,24 @@ public class ServerViewModel {
     public String ipInput;
     public String portInput;
 
+    private TcpServer server;
+    private ExecutorService executor;
+
     public void OpenServerCommand(ActionEvent e) {
-        TcpServer server = new TcpServer();
+        server = new TcpServer();
         server.onSystemMessage = onSystemMessage;
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             server.open(Util.getStringAsIntOrZero(portInput));
         });
+    }
+
+    public void CloseServerCommand(ActionEvent e) {
+        if (server == null)
+            return;
+        server.shutdown();
+        executor.shutdownNow();
+        onSystemMessage.accept("Server has been stopped.");
     }
 }

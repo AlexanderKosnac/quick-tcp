@@ -12,6 +12,8 @@ public class ServerView extends JFrame {
 
     private static int pad = 5;
 
+    private boolean isServerOpen = false;
+
     public ServerView(ServerViewModel vm) {
         setTitle(String.format("Quick TCP Server #%d", number++));
         setLocationRelativeTo(null);
@@ -51,9 +53,16 @@ public class ServerView extends JFrame {
         gbc.weightx = 0.2;
         JButton start = new JButton("Start");
         start.addActionListener(e -> {
-            vm.ipInput = ipInput.getText();
-            vm.portInput = portInput.getText();
-            vm.OpenServerCommand(e);
+            if (isServerOpen) {
+                vm.CloseServerCommand(e);
+                start.setText("Start");
+            } else {
+                vm.ipInput = ipInput.getText();
+                vm.portInput = portInput.getText();
+                vm.OpenServerCommand(e);
+                start.setText("Stop");
+            }
+            isServerOpen = !isServerOpen;
         });
         contentPane.add(start, gbc);
 
