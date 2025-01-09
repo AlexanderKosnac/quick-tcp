@@ -28,7 +28,25 @@ public class TcpClient {
         } catch (IOException ex) {
             onSystemMessage.accept("I/O error: " + ex.getMessage());
         } finally {
-            disconnect();
+            close();
+        }
+    }
+
+    public void disconnect() {
+        try {
+            if (socket != null) socket.close();
+        } catch (IOException ex) {
+            onSystemMessage.accept("Error when disconnecting: " + ex.getMessage());
+        }
+    }
+
+    public void close() {
+        try {
+            if (writer != null) writer.close();
+            if (socket != null) socket.close();
+            if (reader != null) reader.close();
+        } catch (IOException ex) {
+            onSystemMessage.accept("Error when disconnecting from server: " + ex.getMessage());
         }
     }
 
@@ -37,17 +55,6 @@ public class TcpClient {
             writer.println(message);
         } else {
             onSystemMessage.accept("Not connected to a server.");
-        }
-    }
-
-    public void disconnect() {
-        try {
-            if (reader != null) reader.close();
-            if (writer != null) writer.close();
-            if (socket != null) socket.close();
-            onSystemMessage.accept("Disconnected from the server.");
-        } catch (IOException ex) {
-            onSystemMessage.accept("Error during disconnect: " + ex.getMessage());
         }
     }
 }

@@ -19,9 +19,9 @@ public class TcpServer {
     private ServerSocket serverSocket;
 
     public void open(int port) {
-        running = true;
         try {
             serverSocket = new ServerSocket(port);
+            running = true;
             onSystemMessage.accept("Server opened on port " + port + ".");
 
             while (running) {

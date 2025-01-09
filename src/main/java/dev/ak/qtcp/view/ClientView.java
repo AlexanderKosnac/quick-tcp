@@ -12,6 +12,8 @@ public class ClientView extends JFrame {
 
     private static int pad = 5;
 
+    private boolean isClientConnected = false;
+
     public ClientView(ClientViewModel vm) {
         setTitle(String.format("Quick TCP Client #%d", number++));
         setLocationRelativeTo(null);
@@ -50,9 +52,16 @@ public class ClientView extends JFrame {
         gbc.weightx = 0.2;
         JButton connect = new JButton("Connect");
         connect.addActionListener(e -> {
-            vm.ipInput = ipInput.getText();
-            vm.portInput = portInput.getText();
-            vm.ConnectToServerCommand(e);
+            if (isClientConnected) {
+                vm.DisconnectFromServerCommand(e);
+                connect.setText("Connect");
+            } else {
+                vm.ipInput = ipInput.getText();
+                vm.portInput = portInput.getText();
+                vm.ConnectToServerCommand(e);
+                connect.setText("Disconnect");
+            }
+            isClientConnected = !isClientConnected;
         });
         contentPane.add(connect, gbc);
 

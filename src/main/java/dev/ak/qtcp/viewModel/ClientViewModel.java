@@ -14,6 +14,7 @@ public class ClientViewModel {
 
     public String ipInput;
     public String portInput;
+
     public String messageInput;
 
     private TcpClient client;
@@ -27,6 +28,14 @@ public class ClientViewModel {
         executor.submit(() -> {
             client.connect(ipInput, Util.getStringAsIntOrZero(portInput));
         });
+    }
+
+    public void DisconnectFromServerCommand(ActionEvent e) {
+        if (client == null)
+            return;
+        client.disconnect();
+        executor.shutdown();
+        onSystemMessage.accept("Client has been disconnected.");
     }
 
     public void SendMessageCommand(ActionEvent e) {
