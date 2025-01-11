@@ -8,7 +8,7 @@ public class Util {
 
     public static int getStringAsIntOrDefault(String input, int defaultVal) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             return defaultVal;
         }
