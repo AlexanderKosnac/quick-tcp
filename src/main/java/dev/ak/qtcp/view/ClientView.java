@@ -1,6 +1,8 @@
 package dev.ak.qtcp.view;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
@@ -9,9 +11,7 @@ import dev.ak.qtcp.viewModel.ClientViewModel;
 public class ClientView extends JFrame {
 
     private static int number = 1;
-
     private static int pad = 5;
-
     private boolean isClientConnected = false;
 
     public ClientView(ClientViewModel vm) {
@@ -97,6 +97,16 @@ public class ClientView extends JFrame {
         vm.onSystemMessage = msg -> messageLog.append(msg + "\n");
         JScrollPane logPane = new JScrollPane(messageLog);
         contentPane.add(logPane, gbc);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (isClientConnected) {
+                    vm.DisconnectFromServerCommand(null);
+                }
+                dispose();
+            }
+        });
 
         setVisible(true);
     }
