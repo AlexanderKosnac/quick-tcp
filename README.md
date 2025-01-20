@@ -9,3 +9,8 @@ The project uses Maven. To run the project use the following:
 ```bash
 mvn exec:java -Dexec.mainClass="dev.ak.qtcp.App"
 ```
+
+To run tests:
+```bash
+mvn test
+```
