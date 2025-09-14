@@ -16,7 +16,7 @@ public class ServerView extends JFrame {
         setTitle(String.format("Quick TCP Server #%d", number++));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(800, 600);
+        setSize(800, 300);
 
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridBagLayout());
