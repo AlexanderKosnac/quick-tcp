@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+import dev.ak.qtcp.core.InputFormat;
 import dev.ak.qtcp.viewModel.ClientViewModel;
 
 public class ClientView extends JFrame {
@@ -80,13 +81,37 @@ public class ClientView extends JFrame {
         });
         contentPane.add(sendButton, gbc);
 
+        JRadioButton asAsciiInput = new JRadioButton("As ASCII");
+        asAsciiInput.addActionListener(e -> {
+            vm.SetInputFormat(InputFormat.ASCII);
+        });
+        asAsciiInput.setSelected(true);
+
+        JRadioButton asHexInput = new JRadioButton("As Hex");
+        asHexInput.addActionListener(e -> {
+            vm.SetInputFormat(InputFormat.HEX);
+        });
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(asAsciiInput);
+        group.add(asHexInput);
+
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panel.add(asAsciiInput);
+        panel.add(asHexInput);
+
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.gridwidth = 5;
+        contentPane.add(panel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         gbc.gridwidth = 5;
         contentPane.add(new JLabel("Message Log:"), gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 5;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
