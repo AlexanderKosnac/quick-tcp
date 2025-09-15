@@ -25,7 +25,7 @@ public class LauncherView extends JFrame {
         
         menuBar.add(help);
         help.add(helpAbout);
-        helpAbout.addActionListener(e -> vm.HelpAboutCommand(e));
+        helpAbout.addActionListener(e -> vm.helpAboutCommand(e));
         setJMenuBar(menuBar);
 
         // Body
@@ -45,13 +45,13 @@ public class LauncherView extends JFrame {
         gbc.gridx = 0;
         gbc.gridwidth = 1; // Reset gridwidth
         JButton createServer = new JButton("New Server");
-        createServer.addActionListener(e -> vm.CreateServerCommand(e));
+        createServer.addActionListener(e -> vm.createServerCommand(e));
         contentPane.add(createServer, gbc);
 
         // Client Button
         gbc.gridx = 1;
         JButton createClient = new JButton("New Client");
-        createClient.addActionListener(e -> vm.CreateClientCommand(e));
+        createClient.addActionListener(e -> vm.createClientCommand(e));
         contentPane.add(createClient, gbc);
 
         setVisible(true);

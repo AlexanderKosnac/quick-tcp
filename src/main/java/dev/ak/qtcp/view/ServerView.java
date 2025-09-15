@@ -52,12 +52,12 @@ public class ServerView extends JFrame {
         JButton start = new JButton("Start");
         start.addActionListener(e -> {
             if (isServerOpen) {
-                vm.CloseServerCommand(e);
+                vm.closeServerCommand(e);
                 start.setText("Start");
             } else {
                 vm.ipInput = ipInput.getText();
                 vm.portInput = portInput.getText();
-                vm.OpenServerCommand(e);
+                vm.openServerCommand(e);
                 start.setText("Stop");
             }
             isServerOpen = !isServerOpen;
@@ -86,7 +86,7 @@ public class ServerView extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (isServerOpen) {
-                    vm.CloseServerCommand(null);
+                    vm.closeServerCommand(null);
                 }
                 dispose();
             }

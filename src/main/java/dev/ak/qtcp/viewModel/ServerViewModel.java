@@ -18,7 +18,7 @@ public class ServerViewModel {
     private TcpServer server;
     private ExecutorService executor;
 
-    public void OpenServerCommand(ActionEvent e) {
+    public void openServerCommand(ActionEvent e) {
         server = new TcpServer();
         server.onSystemMessage = onSystemMessage;
 
@@ -28,7 +28,7 @@ public class ServerViewModel {
         });
     }
 
-    public void CloseServerCommand(ActionEvent e) {
+    public void closeServerCommand(ActionEvent e) {
         if (server == null)
             return;
         server.shutdown();

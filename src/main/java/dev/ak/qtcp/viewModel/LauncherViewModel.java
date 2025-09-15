@@ -6,15 +6,15 @@ import dev.ak.qtcp.view.*;
 
 public class LauncherViewModel {
     
-    public void HelpAboutCommand(ActionEvent e) {
+    public void helpAboutCommand(ActionEvent e) {
         new AboutView();
     }
 
-    public void CreateServerCommand(ActionEvent e) {
+    public void createServerCommand(ActionEvent e) {
         new ServerView(new ServerViewModel());
     }
 
-    public void CreateClientCommand(ActionEvent e) {
+    public void createClientCommand(ActionEvent e) {
         new ClientView(new ClientViewModel());
     }
 }

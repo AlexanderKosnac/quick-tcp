@@ -23,7 +23,7 @@ public class ClientViewModel {
     private TcpClient client;
     private ExecutorService executor;
 
-    public void ConnectToServerCommand(ActionEvent e) {
+    public void connectToServerCommand(ActionEvent e) {
         client = new TcpClient();
         client.onSystemMessage = onSystemMessage;
 
@@ -33,7 +33,7 @@ public class ClientViewModel {
         });
     }
 
-    public void DisconnectFromServerCommand(ActionEvent e) {
+    public void disconnectFromServerCommand(ActionEvent e) {
         if (client == null)
             return;
         client.disconnect();
@@ -41,7 +41,7 @@ public class ClientViewModel {
         onSystemMessage.accept("Client has been disconnected.");
     }
 
-    public void SendMessageCommand(ActionEvent e) {
+    public void sendMessageCommand(ActionEvent e) {
         switch (formatInput) {
             case ASCII:
                 client.send(messageInput);
@@ -56,7 +56,7 @@ public class ClientViewModel {
         }
     }
 
-    public void SetInputFormat(InputFormat format) {
+    public void setInputFormat(InputFormat format) {
         formatInput = format;
     }
 }

@@ -54,12 +54,12 @@ public class ClientView extends JFrame {
         JButton connect = new JButton("Connect");
         connect.addActionListener(e -> {
             if (isClientConnected) {
-                vm.DisconnectFromServerCommand(e);
+                vm.disconnectFromServerCommand(e);
                 connect.setText("Connect");
             } else {
                 vm.ipInput = ipInput.getText();
                 vm.portInput = portInput.getText();
-                vm.ConnectToServerCommand(e);
+                vm.connectToServerCommand(e);
                 connect.setText("Disconnect");
             }
             isClientConnected = !isClientConnected;
@@ -77,19 +77,19 @@ public class ClientView extends JFrame {
         JButton sendButton = new JButton("Send");
         sendButton.addActionListener(e -> {
             vm.messageInput = messageInput.getText();
-            vm.SendMessageCommand(e);
+            vm.sendMessageCommand(e);
         });
         contentPane.add(sendButton, gbc);
 
         JRadioButton asAsciiInput = new JRadioButton("As ASCII");
         asAsciiInput.addActionListener(e -> {
-            vm.SetInputFormat(InputFormat.ASCII);
+            vm.setInputFormat(InputFormat.ASCII);
         });
         asAsciiInput.setSelected(true);
 
         JRadioButton asHexInput = new JRadioButton("As Hex");
         asHexInput.addActionListener(e -> {
-            vm.SetInputFormat(InputFormat.HEX);
+            vm.setInputFormat(InputFormat.HEX);
         });
 
         ButtonGroup group = new ButtonGroup();
@@ -127,7 +127,7 @@ public class ClientView extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (isClientConnected) {
-                    vm.DisconnectFromServerCommand(null);
+                    vm.disconnectFromServerCommand(null);
                 }
                 dispose();
             }
