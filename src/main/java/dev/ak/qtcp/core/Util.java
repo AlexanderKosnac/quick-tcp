@@ -22,7 +22,10 @@ public class Util {
 
         int len = hex.length();
         if (len % 2 != 0) {
-            throw new IllegalArgumentException("Hex string must have even length");
+            throw new IllegalArgumentException("Hex string must have even length.");
+        }
+        if (!hex.matches("[0-9a-fA-F]*")) {
+            throw new IllegalArgumentException("String contains non-hex characters.");
         }
 
         byte[] result = new byte[len/2];

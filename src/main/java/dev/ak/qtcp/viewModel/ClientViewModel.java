@@ -47,9 +47,13 @@ public class ClientViewModel {
                 client.send(messageInput);
                 break;
             case HEX:
-                byte[] bytes = Util.getHexStringAsByteArray(messageInput);
-                String ascii = new String(bytes, StandardCharsets.US_ASCII);
-                client.send(ascii);
+                try {
+                    byte[] bytes = Util.getHexStringAsByteArray(messageInput);
+                    String ascii = new String(bytes, StandardCharsets.US_ASCII);
+                    client.send(ascii);
+                } catch (Exception ex) {
+                    onSystemMessage.accept(String.format("Failed to send message: %s", ex.getMessage()));
+                }
                 break;
             default:
                 throw new IllegalStateException("Format Input: " + formatInput);
