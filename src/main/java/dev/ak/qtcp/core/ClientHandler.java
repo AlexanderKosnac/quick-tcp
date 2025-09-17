@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.function.Consumer;
 
-class ClientHandler extends Thread {
+public class ClientHandler extends Thread {
 
     public Consumer<String> onSystemMessage = (e) -> {};
 
