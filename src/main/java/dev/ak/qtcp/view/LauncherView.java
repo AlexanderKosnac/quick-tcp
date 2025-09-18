@@ -1,7 +1,13 @@
 package dev.ak.qtcp.view;
 
+import java.net.URL;
+
 import java.awt.*;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.*;
+
 import dev.ak.qtcp.viewModel.LauncherViewModel;
 
 public class LauncherView extends JFrame {
@@ -9,6 +15,14 @@ public class LauncherView extends JFrame {
     private static int pad = 5;
 
     public LauncherView(LauncherViewModel vm) {
+        URL iconURL = getClass().getResource("/icon.png");
+        if (iconURL != null) {
+            Image icon = Toolkit.getDefaultToolkit().getImage(iconURL);
+            setIconImage(icon);
+        } else {
+            System.err.println("Icon not found!");
+        }
+
         setTitle("Quick TCP Launcher");
         setLocationRelativeTo(null);
         setResizable(false);

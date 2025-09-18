@@ -2,9 +2,6 @@ package dev.ak.qtcp.view;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.FileNotFoundException;
-import java.net.URL;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -33,13 +30,13 @@ public class AboutView extends JFrame {
         panel.add(textArea);
 
         Image iconImage = null;
-        URL iconURL = getClass().getResource("/icon.png");
-        if (iconURL != null) {
-            iconImage = Toolkit.getDefaultToolkit().getImage(iconURL);
-        } else {
-            System.err.println("Icon file could not be found.");
+        try {
+            iconImage = Util.loadSvgAsImage("/icon.svg", 96, 96);
+        } catch (Exception ex) {
+            System.err.println("Failed to load icon file." + ex.getMessage());
             System.exit(1);
         }
+
         ImageCanvas icon = new ImageCanvas(iconImage);
         icon.setSize(128, 128);
         panel.add(icon);

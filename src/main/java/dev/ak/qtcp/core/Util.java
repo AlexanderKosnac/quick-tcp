@@ -1,5 +1,17 @@
 package dev.ak.qtcp.core;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.ImageTranscoder;
+
 public class Util {
 
     public static int getStringAsIntOrZero(String input) {
@@ -35,5 +47,41 @@ public class Util {
                 Character.digit(hex.charAt(i + 1), 16));
         }
         return result;
-    } 
+    }
+
+    public static Image loadSvgAsImage(String resourcePath, float width, float height) throws URISyntaxException, IOException, TranscoderException {
+        URL url = Util.class.getResource(resourcePath);
+        if (url == null)
+            throw new IOException("Failed to get URL to icon.");
+        return loadSvgAsImage(new File(url.toURI()), width, height);
+    }
+
+    public static Image loadSvgAsImage(File svgFile, float width, float height) throws IOException, TranscoderException {
+        class BufferedImageTranscoder extends ImageTranscoder {
+            private BufferedImage image;
+
+            @Override
+            public BufferedImage createImage(int w, int h) {
+                return new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            }
+
+            @Override
+            public void writeImage(BufferedImage img, TranscoderOutput output) {
+                this.image = img;
+            }
+
+            public BufferedImage getBufferedImage() {
+                return image;
+            }
+        }
+        BufferedImageTranscoder transcoder = new BufferedImageTranscoder();
+
+        transcoder.addTranscodingHint(ImageTranscoder.KEY_WIDTH, width);
+        transcoder.addTranscodingHint(ImageTranscoder.KEY_HEIGHT, height);
+
+        TranscoderInput input = new TranscoderInput(svgFile.toURI().toString());
+        transcoder.transcode(input, null);
+
+        return transcoder.getBufferedImage();
+    }
 }
