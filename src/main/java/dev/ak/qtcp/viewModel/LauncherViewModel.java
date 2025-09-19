@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import dev.ak.qtcp.view.*;
 
 public class LauncherViewModel {
-    
+
     public void helpAboutCommand(ActionEvent e) {
         new AboutView();
     }

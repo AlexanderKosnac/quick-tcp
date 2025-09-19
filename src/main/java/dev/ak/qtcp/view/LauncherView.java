@@ -26,7 +26,7 @@ public class LauncherView extends BaseFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu help = new JMenu("Help");
         JMenuItem helpAbout = new JMenuItem("About");
-        
+
         menuBar.add(help);
         help.add(helpAbout);
         helpAbout.addActionListener(e -> vm.helpAboutCommand(e));
