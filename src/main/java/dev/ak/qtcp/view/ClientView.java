@@ -9,7 +9,7 @@ import javax.swing.*;
 import dev.ak.qtcp.core.InputFormat;
 import dev.ak.qtcp.viewModel.ClientViewModel;
 
-public class ClientView extends JFrame {
+public class ClientView extends BaseFrame {
 
     private static int number = 1;
     private static int pad = 5;

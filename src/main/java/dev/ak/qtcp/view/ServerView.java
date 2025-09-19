@@ -6,7 +6,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import dev.ak.qtcp.viewModel.ServerViewModel;
 
-public class ServerView extends JFrame {
+public class ServerView extends BaseFrame {
 
     private static int number = 1;
     private static int pad = 5;

@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import dev.ak.qtcp.core.*;
 
-public class AboutView extends JFrame {
+public class AboutView extends BaseFrame {
 
     private static int pad = 5;
 
@@ -29,16 +29,10 @@ public class AboutView extends JFrame {
         textArea.setFont(new JLabel().getFont());
         panel.add(textArea);
 
-        Image iconImage = null;
-        try {
-            iconImage = Util.loadSvgAsImage("/icon.svg", 96, 96);
-        } catch (Exception ex) {
-            System.err.println("Failed to load icon file." + ex.getMessage());
-            System.exit(1);
-        }
-
+        int r = 96;
+        Image iconImage = Assets.getIcon(r);
         ImageCanvas icon = new ImageCanvas(iconImage);
-        icon.setSize(128, 128);
+        icon.setSize(r, r);
         panel.add(icon);
 
         setTitle("About Quick TCP");
