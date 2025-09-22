@@ -2,10 +2,9 @@ package dev.ak.qtcp.core;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -50,13 +49,15 @@ public class Util {
     }
 
     public static Image loadSvgAsImage(String resourcePath, float width, float height) throws URISyntaxException, IOException, TranscoderException {
-        URL url = Util.class.getResource(resourcePath);
-        if (url == null)
-            throw new IOException("Failed to get URL to icon.");
-        return loadSvgAsImage(new File(url.toURI()), width, height);
+        try (InputStream in = Util.class.getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new IOException("Failed to get resource: " + resourcePath);
+            }
+            return loadSvgAsImage(in, width, height);
+        }
     }
 
-    public static Image loadSvgAsImage(File svgFile, float width, float height) throws IOException, TranscoderException {
+    private static Image loadSvgAsImage(InputStream in, float width, float height) throws IOException, TranscoderException {
         class BufferedImageTranscoder extends ImageTranscoder {
             private BufferedImage image;
 
@@ -74,12 +75,12 @@ public class Util {
                 return image;
             }
         }
-        BufferedImageTranscoder transcoder = new BufferedImageTranscoder();
 
+        BufferedImageTranscoder transcoder = new BufferedImageTranscoder();
         transcoder.addTranscodingHint(ImageTranscoder.KEY_WIDTH, width);
         transcoder.addTranscodingHint(ImageTranscoder.KEY_HEIGHT, height);
 
-        TranscoderInput input = new TranscoderInput(svgFile.toURI().toString());
+        TranscoderInput input = new TranscoderInput(in);
         transcoder.transcode(input, null);
 
         return transcoder.getBufferedImage();
