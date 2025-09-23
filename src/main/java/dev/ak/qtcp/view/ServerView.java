@@ -3,7 +3,10 @@ package dev.ak.qtcp.view;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
+
 import dev.ak.qtcp.viewModel.ServerViewModel;
 
 public class ServerView extends BaseFrame {
@@ -79,7 +82,13 @@ public class ServerView extends BaseFrame {
         messageLog.setDisabledTextColor(Color.BLACK);
         messageLog.setEnabled(false);
         messageLog.setRows(10);
-        vm.onSystemMessage = msg -> messageLog.append(msg + "\n");
+        vm.onSystemMessage = msg -> {
+            SwingUtilities.invokeLater(() -> {
+                messageLog.append(msg + "\n");
+            });
+        };
+        ((DefaultCaret) messageLog.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
         JScrollPane logPane = new JScrollPane(messageLog);
         contentPane.add(logPane, gbc);
 
