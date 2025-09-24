@@ -118,8 +118,7 @@ public class ClientView extends BaseFrame {
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         JTextArea messageLog = new JTextArea();
-        messageLog.setDisabledTextColor(Color.BLACK);
-        messageLog.setEnabled(false);
+        messageLog.setEditable(false);
         messageLog.setRows(10);
         vm.onSystemMessage = msg -> {
             SwingUtilities.invokeLater(() -> {
